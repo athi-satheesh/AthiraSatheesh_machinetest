@@ -1,0 +1,41 @@
+{% extends 'index_admin.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div>
+<div style="float:left; height:80px">
+<div class="container mt-3" >
+  <div class="input-group">
+      <form method="get" action="{% url 'search_books' %}">
+    <!-- other form fields -->
+    <input type="text" name="q" placeholder="Search Book..." value="{{ query }}" style="border-radius: 5px;border: 1px solid">
+    <button class="btn btn-outline-secondary rounded" type="submit">Search</button>
+</form>
+
+    </div>
+  </div>
+    </div>
+<table class="table table-bordered table-sm " style="text-align: center;width: 130%;">
+    <tr>
+        <th>No</th>
+         <th>Book Name</th>
+        <th>Author Name</th>
+        <th>Created Date</th>
+        <th>Action</th>
+        <th>Status</th>
+
+    </tr>
+    {% for x in books %}
+    <tr>
+        <td>{{x.id}}</td>
+        <td>{{ x.book_name }}</td>
+        <td>{{ x.author_name }}</td>
+        <td>{{x.created_date}}</td>
+        <td><a href="{% url 'updateAuthorDetails' x.id %}" class="btn btn-primary">Update</a></td>
+        <td>Status</td>
+
+    </tr>
+    {% endfor %}
+
+</table>
+
+{% endblock %}
