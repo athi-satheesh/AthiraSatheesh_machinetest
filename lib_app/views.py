@@ -54,6 +54,8 @@ def viewAuthorList(request):
                 if not Author.objects.filter(author_name=authorname).exists():
                     addAuthor_form1.save()
                     return redirect('viewauthorlist')
+                else:
+                    messages.info(request, 'Author already Added')
         elif 'cancel' in request.POST:
             return redirect('viewauthorlist')
 
