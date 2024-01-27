@@ -2,23 +2,19 @@
 {% load static %}
 <html lang="en">
   <head>
-  	<title>Login</title>
+  	<title>Readers Login</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
 	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
-
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
 	<link rel="stylesheet" href=" {% static 'login_assets/css/style.css' %} ">
-
 	</head>
+
 	<body class="img js-fullheight" style="background-image:url( {% static 'login_assets/images/book.jpg' %} )">
 	<section class="ftco-section">
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-md-6 text-center mb-5">
-
 				</div>
 			</div>
 			<div class="row justify-content-center">
@@ -35,15 +31,13 @@
 	              <input id="password-field" name="pass" type="password" class="form-control" placeholder="Password" required>
 	              <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
 	            </div>
-
-<!--					print_error_message-->
+<!--print_error_message-->
 					<div>
-        {% for message in messages %}
-<div class="alert alert-warning" role="alert">
-       {{message}}
-    {% endfor %}
-</div>
-
+				{% for message in messages %}
+		<div class="alert alert-warning" role="alert">
+			   {{message}}
+			{% endfor %}
+		</div>
 	            <div class="form-group">
 	            	<button type="submit" class="form-control btn btn-primary submit px-3" >Login</button>
 	            </div>
@@ -64,12 +58,10 @@
 			</div>
 		</div>
 	</section>
-
 	<script src=" {% static 'login_assets/js/jquery.min.js' %} "></script>
   <script src=" {% static 'login_assets/js/popper.js' %} "></script>
   <script src=" {% static 'login_assets/js/bootstrap.min.js' %} "></script>
   <script src=" {% static 'login_assets/js/main.js' %} "></script>
-
 	</body>
 </html>
 

@@ -10,32 +10,31 @@
     <input type="text" name="q" placeholder="Search Book..." value="{{ query }}" style="border-radius: 5px;border: 1px solid">
     <button class="btn btn-outline-secondary rounded" type="submit">Search</button>
 </form>
-
     </div>
   </div>
     </div>
 <div style="float:right;margin-top:20px; margin-left:150px">
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Add Book</button>
-
         <!-- Modal -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
-
       <div class="modal-body">
           <form method="post">
         {% csrf_token %}
         {{book_form}}
-
+                {% for message in messages %}
+              {{message}}
+              {% endfor %}
       </div>
       <div class="modal-footer">
        <button type="submit" class="btn btn-primary" name="submit">Add Book</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-      </div> </form>
+      </div>
+        </form>
     </div>
   </div>
 </div>
-
 </div>
 <table class="table table-bordered table-sm " style="text-align: center">
     <tr>
@@ -45,20 +44,20 @@
         <th>Created Date</th>
         <th>Action</th>
         <th>Status</th>
-
     </tr>
-    {% for x in data %}
+    {% for x in books %}
     <tr>
-        <td>{{x.id}}</td>
+        <td>{{forloop.counter}}</td>
         <td>{{ x.book_name }}</td>
         <td>{{ x.author_name }}</td>
         <td>{{x.created_date}}</td>
-        <td><a href="{% url 'updateAuthorDetails' x.id %}" class="btn btn-primary">Update</a></td>
-        <td>status</td>
-
+        <td> <a href="{% url 'updateBookDetails' x.id %}" ><i class='fa fa-edit' style='font-size:24px; color:white'></i></a></td>
+        <td><label class="switch">
+  <input type="checkbox" {% if x.status %} checked {%endif%}>
+  <span class="slider round"></span>
+</label></td>
     </tr>
     {% endfor %}
-
 </table>
      <nav aria-label="Page navigation" >
             <ul class="pagination justify-content-center" >

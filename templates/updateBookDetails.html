@@ -4,12 +4,12 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8">
-            <h1 class="text-center display-4">Update Author Details</h1>
+            <h1 class="text-center display-4">Update Book Details</h1>
         </div>
         <div class="col-md-8">
             <form method="POST" enctype="multipart/form-data">
                  {% csrf_token %}
-                {{ Author_form|crispy }}
+                {{ Book_form|crispy }}
         <button type="submit" class="btn btn-primary">Update</button>
                 </form>
     </div>

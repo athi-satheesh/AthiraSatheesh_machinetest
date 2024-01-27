@@ -10,7 +10,6 @@
     <input type="text" name="q" placeholder="Search Book..." value="{{ query }}" style="border-radius: 5px;border: 1px solid">
     <button class="btn btn-outline-secondary rounded" type="submit">Search</button>
 </form>
-
     </div>
   </div>
     </div>
@@ -22,7 +21,6 @@
         <th>Created Date</th>
         <th>Action</th>
         <th>Status</th>
-
     </tr>
     {% for x in books %}
     <tr>
@@ -31,11 +29,11 @@
         <td>{{ x.author_name }}</td>
         <td>{{x.created_date}}</td>
         <td><a href="{% url 'updateAuthorDetails' x.id %}" class="btn btn-primary">Update</a></td>
-        <td>Status</td>
-
+        <td><label class="switch">
+  <input type="checkbox" {% if x.status %} checked {%endif%}>
+  <span class="slider round"></span>
+</label></td>
     </tr>
     {% endfor %}
-
 </table>
-
 {% endblock %}

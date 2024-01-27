@@ -2,7 +2,6 @@
 {% load crispy_forms_filters %}
 {% load crispy_forms_tags %}
 {% block content %}
-
 <div>
 <div style="float:left; height:80px">
 <div class="container mt-3" >
@@ -12,12 +11,9 @@
     <input type="text" name="q" placeholder="Search Author..." value="{{ query }}" style="border-radius: 5px;border: 1px solid">
     <button class="btn btn-outline-secondary rounded" type="submit">Search</button>
 </form>
-
     </div>
   </div>
     </div>
-
-
 </div>
 
 
@@ -29,7 +25,6 @@
         <th>Email</th>
         <th>Details</th>
               <th>Status</th>
-
     </tr>
     {% for x in authors %}
     <tr>
@@ -37,17 +32,14 @@
         <td>{{ x.author_name }}</td>
         <td>{{ x.username }}</td>
         <td>{{x.email}}</td>
-        <td> <form method="POST" action="{% url 'viewAuthorDetails' x.id %}" >
-                 {% csrf_token %}
-        <button type="submit" class="btn btn-primary">Details</button>
-                </form></td>
-        <td><Status</td>
-
+        <td> <a href="{% url 'viewAuthorDetails' x.id %}"><i class="fa fa-eye" style="font-size:24px; color:white"></i></a>  {% csrf_token %}</td>
+        <td><label class="switch">
+  <input type="checkbox" {% if x.status %} checked {%endif%}>
+  <span class="slider round"></span>
+</label></td>
     </tr>
     {% endfor %}
-
 </table>
-
 {% endblock %}
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>

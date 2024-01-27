@@ -5,11 +5,12 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Logoipsum</title>
+    <title>Readers</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href=" {% static 'admin_assets/vendors/mdi/css/materialdesignicons.min.css' %} ">
     <link rel="stylesheet" href=" {% static 'admin_assets/vendors/css/vendor.bundle.base.css' %} ">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- endinject -->
     <!-- Plugin css for this page -->
     <link rel="stylesheet" href=" {% static 'admin_assets/vendors/jvectormap/jquery-jvectormap.css' %} ">
@@ -22,7 +23,71 @@
     <!-- Layout styles -->
     <link rel="stylesheet" href=" {% static 'admin_assets/css/style.css' %} ">
     <!-- End layout styles -->
+       <style>
+            .switch {
+              position: relative;
+              display: inline-block;
+              width: 60px;
+              height: 34px;
+            }
+
+            /* Hide default HTML checkbox */
+            .switch input {
+              opacity: 0;
+              width: 0;
+              height: 0;
+            }
+
+            /* The slider */
+            .slider {
+              position: absolute;
+              cursor: pointer;
+              top: 0;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              background-color: #ccc;
+              -webkit-transition: .4s;
+              transition: .4s;
+            }
+
+            .slider:before {
+              position: absolute;
+              content: "";
+              height: 26px;
+              width: 26px;
+              left: 4px;
+              bottom: 4px;
+              background-color: white;
+              -webkit-transition: .4s;
+              transition: .4s;
+            }
+
+            input:checked + .slider {
+              background-color: #2196F3;
+            }
+
+            input:focus + .slider {
+              box-shadow: 0 0 1px #2196F3;
+            }
+
+            input:checked + .slider:before {
+              -webkit-transform: translateX(26px);
+              -ms-transform: translateX(26px);
+              transform: translateX(26px);
+            }
+
+            /* Rounded sliders */
+            .slider.round {
+              border-radius: 34px;
+            }
+
+            .slider.round:before {
+              border-radius: 50%;
+            }
+</style>
   </head>
+
   <body style="background-image:url( {% static 'login_assets/images/book.jpg' %} )">
     <div class="container-scroller">
       <!-- partial:partials/_sidebar.html -->
@@ -30,7 +95,6 @@
         <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
           <img class="img-xs rounded-circle " src=" {% static 'admin_assets/images/logo.jpg' %} " alt="">
           <span>&nbsp&nbspREADERS</span>
-
         </div>
         <ul class="nav">
           <li class="nav-item profile">
@@ -38,39 +102,32 @@
               <div class="profile-pic">
                 <div class="count-indicator">
                 </div>
-
               </div>
               <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list" aria-labelledby="profile-dropdown">
-
-
               </div>
             </div>
           </li>
-<li class="nav-item menu-items">
+    <li class="nav-item menu-items">
             <a class="nav-link" href=" {% url 'viewauthorlist' %} ">
 
               <span class="menu-title" style="padding-left:80px">Author</span>
             </a>
           </li>
-
           <li class="nav-item menu-items">
             <a class="nav-link" href=" {% url 'viewbooklist' %} ">
 
               <span class="menu-title" style="padding-left:80px">Books</span>
             </a>
           </li>
-
-
-<li class="nav-item menu-items">
+    <li class="nav-item menu-items">
             <a class="nav-link" href=" {% url 'login1' %} ">
 
               <span class="menu-title" style="padding-left:80px">Logout</span>
             </a>
           </li>
-
-
         </ul>
       </nav>
+
       <!-- partial -->
       <div class="container-fluid page-body-wrapper">
         <!-- partial:partials/_navbar.html -->
@@ -84,32 +141,23 @@
                 <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
                   <div class="navbar-profile">
                     <img class="img-xs rounded-circle" src="{% static 'admin_assets/images/faces/face1.jpg' %}" alt="">
-                    <p class="mb-0 d-none d-sm-block navbar-profile-name">Angela Brower</p>
+                    <p class="mb-0 d-none d-sm-block navbar-profile-name" style="text-transform: capitalize;">{{request.user}}</p>
                   </div>
                 </a>
-
               </li>
-
               <li class="nav-item dropdown border-left">
                 <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
-
-
                     <div class="preview-item-content">
                       <span class="preview-subject mb-1">Log out</span>
                     </div>
                 </a>
-
               </li>
-
             </ul>
             <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
               <span class="mdi mdi-format-line-spacing"></span>
             </button>
           </div>
         </nav>
-
-
-
         <!-- partial -->
         <div class="main-panel">
           <div class="content-wrapper">
@@ -124,11 +172,11 @@
     <div class="row">
       {% for x in author_details %}
         <div class="col-md-4 mb-4">
-          <div class="card text-black bg-warning mb-3">
-            <div class="card-body">
-              <h5 class="card-title" style="color:black; text-align:center;">{{ x.author_name }}</h5>
-              <p class="card-text"><strong>Breakfast:</strong> {{ x.email }}</p>
-              <p class="card-text"><strong>Lunch:</strong> {{ x.phone_number }}</p>
+          <div class="card text-black mb-3">
+            <div class="card-body" style="color:white">
+                <p class="card-text"><strong>Author Name:</strong> {{ x.author_name }}</p>
+              <p class="card-text"><strong>Email:</strong> {{ x.email }}</p>
+              <p class="card-text"><strong>Phone Number:</strong> {{ x.phone_no }}</p>
               </div>
             </div>
           </div>
@@ -136,7 +184,63 @@
       {% endfor %}
     </div>
   </div>
-
+                    <div style="float:left; height:80px">
+<div class="container mt-3" >
+  <div class="input-group">
+      <form method="get" action="{% url 'search_books' %}">
+    <!-- other form fields -->
+    <input type="text" name="q" placeholder="Search Book..." value="{{ query }}" style="border-radius: 5px;border: 1px solid">
+    <button class="btn btn-outline-secondary rounded" type="submit">Search</button>
+</form>
+    </div>
+<div style="float:right;padding-bottom:50px">
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Add Book</button>
+</div>
+    </div>
+        <!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+          <form method="post">
+        {% csrf_token %}
+        {{book_form}}
+                {% for message in messages %}
+              {{message}}
+              {% endfor %}
+      </div>
+      <div class="modal-footer">
+       <button type="submit" class="btn btn-primary" name="submit">Add Book</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+      </div>
+        </form>
+    </div>
+  </div>
+</div>
+</div>
+                    <table class="table table-bordered table-sm " style="text-align: center">
+    <tr>
+        <th>No</th>
+         <th>Book Name</th>
+        <th>Book ID</th>
+        <th>Created Date</th>
+        <th>Action</th>
+        <th>Status</th>
+    </tr>
+    {% for x in books_by_author %}
+    <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{ x.book_name }}</td>
+        <td>{{ x.book_id }}</td>
+        <td>{{x.created_date}}</td>
+        <td><a href="{% url 'updateBookDetails' x.id %}" ><i class='fa fa-edit' style='font-size:24px; color:white'></i></a></td>
+        <td><label class="switch">
+  <input type="checkbox" {% if x.status %} checked {%endif%}>
+  <span class="slider round"></span>
+</label></td>
+    </tr>
+    {% endfor %}
+</table>
               </div>
               </div>
               </div>
@@ -144,13 +248,8 @@
               </div>
             </div>
           <!-- content-wrapper ends -->
-
-
-
-
           <!-- partial:partials/_footer.html -->
           <footer class="footer">
-
           </footer>
           <!-- partial -->
         </div>
@@ -159,7 +258,6 @@
       <!-- page-body-wrapper ends -->
     </div>
     <!-- container-scroller -->
-
     <!-- plugins:js -->
     <script src=" {% static 'admin_assets/vendors/js/vendor.bundle.base.js' %} "></script>
     <script src="https://kit.fontawesome.com/your-font-awesome-key.js" crossorigin="anonymous"></script>
@@ -180,6 +278,7 @@
     <!-- endinject -->
     <!-- Custom js for this page -->
     <script src=" {% static 'admin_assets/js/dashboard.js' %} "></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     <!-- End custom js for this page -->
   </body>
 </html>
